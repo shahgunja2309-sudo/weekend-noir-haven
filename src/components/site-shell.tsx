@@ -14,14 +14,6 @@ export function SiteShell({ children }: { children: ReactNode }) {
  const path = useRouterState({ select: s => s.location.pathname });
  useEffect(() => { setMobile(false); }, [path]);
  useEffect(() => { document.documentElement.classList.toggle('light', light); }, [light]);
-  useEffect(() => {
-   const observer = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('revealed'); observer.unobserve(e.target); } }), { threshold: 0, rootMargin: '0px 0px -5% 0px' });
-   const scan = () => document.querySelectorAll('.reveal:not(.revealed)').forEach(el => observer.observe(el));
-   scan();
-   const mo = new MutationObserver(scan); mo.observe(document.body, { childList: true, subtree: true });
-   const fallback = window.setTimeout(() => document.querySelectorAll('.reveal').forEach(el => el.classList.add('revealed')), 2500);
-   return () => { observer.disconnect(); mo.disconnect(); window.clearTimeout(fallback); };
-  }, [path]);
  return <JoinContext.Provider value={() => setJoin(true)}><a href="#main" className="skip-link">Skip to content</a><header className="site-header"><Link to="/" className="wordmark">THE WEEKND<span className="wordmark-dot">.</span></Link><nav aria-label="Main navigation" className="desktop-nav">{nav.map(n => <Link key={n.name} to={n.to} className={path === n.to ? 'nav-link active' : 'nav-link'}>{n.name}</Link>)}</nav><div className="header-tools"><Button variant="ghost" size="icon" title="Search" aria-label="Search" onClick={() => setSearch(true)}><Search/></Button><span className="tool-divider"/><Button variant="ghost" size="icon" title={light ? 'Dark mode' : 'Light mode'} aria-label={light ? 'Dark mode' : 'Light mode'} onClick={() => setLight(!light)}>{light ? <Moon/> : <Sun/>}</Button><Button variant="ghost" size="icon" className="mobile-toggle" aria-label={mobile ? 'Close menu' : 'Open menu'} aria-expanded={mobile} onClick={() => setMobile(!mobile)}>{mobile ? <X/> : <Menu/>}</Button></div></header>
  {mobile && <nav className="mobile-nav" aria-label="Mobile navigation">{nav.map(n => <Link key={n.name} to={n.to}>{n.name}<ArrowUpRight className="size-4"/></Link>)}<Button onClick={() => { setMobile(false); setJoin(true); }} className="cinema-button">JOIN THE LIST</Button></nav>}
  <main id="main" key={path} className="page-enter">{children}</main>
