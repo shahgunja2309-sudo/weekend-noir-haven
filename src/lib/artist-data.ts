@@ -26,9 +26,9 @@ export const worlds = [
 ];
 export const news = [
  { title: 'After Hours Til Dawn: the final Asia chapter', date: 'MAY 2026', category: 'TOURS', image: stage.url, description: 'The official tour announcement brings the After Hours Til Dawn experience to Asia.', url: 'https://www.theweeknd.com/' },
- { title: 'Hurry Up Tomorrow. The trilogy is complete.', date: 'JAN 31, 2025', category: 'RELEASES', image: tomorrow.url, description: 'Following After Hours and Dawn FM, the new album closes a cinematic musical trilogy.', url: 'https://www.theweeknd.com/' },
+  { title: 'Hurry Up Tomorrow. The trilogy is complete.', date: 'JAN 31, 2025', category: 'RELEASES', image: tomorrow.url, description: 'Following After Hours and Dawn FM, the new album closes a cinematic musical trilogy.', url: 'https://music.apple.com/us/album/hurry-up-tomorrow/1793702595' },
  { title: 'Timeless: two worlds, one sound', date: 'SEP 27, 2024', category: 'COLLABORATIONS', image: starboy.url, description: 'The Weeknd and Playboi Carti unite on Timeless, a single from the Hurry Up Tomorrow era.', url: 'https://www.youtube.com/watch?v=5EpyN_6dqyk' },
- { title: 'Inside the world of Dawn FM', date: 'JAN 7, 2022', category: 'MUSIC', image: dawn.url, description: 'Revisit the imaginary radio station, cinematic storytelling and synth-pop of Dawn FM.', url: 'https://www.theweeknd.com/' },
+  { title: 'Inside the world of Dawn FM', date: 'JAN 7, 2022', category: 'MUSIC', image: dawn.url, description: 'Revisit the imaginary radio station, cinematic storytelling and synth-pop of Dawn FM.', url: 'https://music.apple.com/us/album/dawn-fm/1603164027' },
 ];
 export function pageHead(title: string, description: string, image?: string) {
  return { meta: [{ title: `${title} — The Weeknd · XO Fan Archive` }, { name: 'description', content: description }, { property: 'og:title', content: `${title} — The Weeknd` }, { property: 'og:description', content: description }, { property: 'og:type', content: 'website' }, { name: 'twitter:card', content: 'summary_large_image' }, ...(image?.startsWith('https://') ? [{ property: 'og:image', content: image }, { name: 'twitter:image', content: image }] : [])] };
