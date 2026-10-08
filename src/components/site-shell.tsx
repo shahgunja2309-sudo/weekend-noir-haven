@@ -1,0 +1,29 @@
+import { Link, useRouterState } from '@tanstack/react-router';
+import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
+import { ArrowUpRight, Instagram, Menu, Moon, Search, Sun, X, Youtube } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { SubmissionForm } from './submission-form';
+import { albums, worlds } from '@/lib/artist-data';
+const JoinContext = createContext(() => {});
+export const useJoinList = () => useContext(JoinContext);
+const nav = [{ name: 'HOME', to: '/' as const }, ...worlds.map(w => ({ name: w.title, to: w.to }))];
+export function SiteShell({ children }: { children: ReactNode }) {
+ const [join, setJoin] = useState(false); const [search, setSearch] = useState(false); const [query, setQuery] = useState(''); const [mobile, setMobile] = useState(false); const [light, setLight] = useState(false);
+ const path = useRouterState({ select: s => s.location.pathname });
+ useEffect(() => { setMobile(false); }, [path]);
+ useEffect(() => { document.documentElement.classList.toggle('light', light); }, [light]);
+ useEffect(() => {
+  const observer = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('revealed'); observer.unobserve(e.target); } }), { threshold: .08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el)); return () => observer.disconnect();
+ }, [path]);
+ return <JoinContext.Provider value={() => setJoin(true)}><a href="#main" className="skip-link">Skip to content</a><header className="site-header"><Link to="/" className="wordmark">THE WEEKND<span className="wordmark-dot">.</span></Link><nav aria-label="Main navigation" className="desktop-nav">{nav.map(n => <Link key={n.name} to={n.to} className={path === n.to ? 'nav-link active' : 'nav-link'}>{n.name}</Link>)}</nav><div className="header-tools"><Button variant="ghost" size="icon" title="Search" aria-label="Search" onClick={() => setSearch(true)}><Search/></Button><span className="tool-divider"/><Button variant="ghost" size="icon" title={light ? 'Dark mode' : 'Light mode'} aria-label={light ? 'Dark mode' : 'Light mode'} onClick={() => setLight(!light)}>{light ? <Moon/> : <Sun/>}</Button><Button variant="ghost" size="icon" className="mobile-toggle" aria-label={mobile ? 'Close menu' : 'Open menu'} aria-expanded={mobile} onClick={() => setMobile(!mobile)}>{mobile ? <X/> : <Menu/>}</Button></div></header>
+ {mobile && <nav className="mobile-nav" aria-label="Mobile navigation">{nav.map(n => <Link key={n.name} to={n.to}>{n.name}<ArrowUpRight className="size-4"/></Link>)}<Button onClick={() => { setMobile(false); setJoin(true); }} className="cinema-button">JOIN THE LIST</Button></nav>}
+ <main id="main" key={path} className="page-enter">{children}</main>
+ <section className="join-band"><div><p className="eyebrow">THE NIGHT DOESN’T END HERE</p><h2>Stay in the <em>after hours.</em></h2><p>Music, moments, and everything in between.</p></div><Button className="cinema-button" onClick={() => setJoin(true)}>JOIN THE LIST<ArrowUpRight/></Button></section>
+ <footer className="site-footer"><div className="footer-top"><Link to="/" className="wordmark">THE WEEKND<span className="wordmark-dot">.</span></Link><span className="footer-mantra">FOR THE MUSIC. FOR THE NIGHT. FOR XO.</span><div className="social-links"><a href="https://www.instagram.com/theweeknd/" target="_blank" rel="noreferrer" aria-label="The Weeknd on Instagram"><Instagram size={18}/></a><a href="https://www.youtube.com/@TheWeeknd" target="_blank" rel="noreferrer" aria-label="The Weeknd on YouTube"><Youtube size={20}/></a><a href="https://www.theweeknd.com/" target="_blank" rel="noreferrer" aria-label="Official The Weeknd website"><ArrowUpRight size={21}/></a></div></div><div className="footer-bottom"><p>© {new Date().getFullYear()} XO FAN ARCHIVE. An independent fan tribute. Not affiliated with The Weeknd or XO.</p><span>ARTWORK © XO / REPUBLIC · HERO: AI-ADAPTED FAN ART</span></div></footer>
+ <Dialog open={join} onOpenChange={setJoin}><DialogContent className="cinema-modal"><p className="eyebrow">XO · AFTER HOURS</p><DialogTitle className="modal-title">Some nights<br/>stay with you.</DialogTitle><DialogDescription>Be part of the After Hours list.</DialogDescription><SubmissionForm/></DialogContent></Dialog>
+ <Dialog open={search} onOpenChange={setSearch}><DialogContent className="cinema-modal"><DialogTitle className="modal-title">Explore the night.</DialogTitle><DialogDescription>Albums, eras and the world of The Weeknd.</DialogDescription><Input value={query} onChange={e => setQuery(e.target.value)} placeholder="Search an era or page…" aria-label="Search archive" className="h-12"/><div className="search-results">{nav.filter(n => n.name.toLowerCase().includes(query.toLowerCase())).map(n => <Link onClick={() => setSearch(false)} to={n.to} key={n.to}>{n.name}<ArrowUpRight size={16}/></Link>)}{albums.filter(a => query && a.title.toLowerCase().includes(query.toLowerCase())).map(a => <Link to="/music" onClick={() => setSearch(false)} key={a.title}>{a.title}<span>{a.year}</span></Link>)}{query && !nav.some(n => n.name.toLowerCase().includes(query.toLowerCase())) && !albums.some(a => a.title.toLowerCase().includes(query.toLowerCase())) && <p className="text-muted-foreground">No matches. Try an album name.</p>}</div></DialogContent></Dialog>
+ </JoinContext.Provider>;
+}
