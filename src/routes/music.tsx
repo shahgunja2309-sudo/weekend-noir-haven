@@ -1,0 +1,12 @@
+import { createFileRoute } from '@tanstack/react-router';
+import { useState } from 'react';
+import { ArrowUpRight, Play } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
+import { PageIntro } from '@/components/editorial';
+import { albums, pageHead } from '@/lib/artist-data';
+export const Route = createFileRoute('/music')({ head: () => pageHead('The music', 'From Trilogy to Hurry Up Tomorrow: explore seven defining eras of The Weeknd, their artwork and signature songs.'), component: Music });
+function Music() {
+ const [selected, setSelected] = useState<(typeof albums)[number] | null>(null);
+ return <><PageIntro label="THE DISCOGRAPHY · 2012—2025" title="THE MUSIC" description="Seven eras. A thousand nights. Step into the records that changed everything."/><section className="content-section"><div className="album-grid">{albums.map((album, index) => <article className="album-item reveal" key={album.title}><div className="album-art"><img src={album.image} alt={`${album.title} album artwork`} className="album-image" loading={index < 3 ? 'eager' : 'lazy'}/></div><div className="album-meta">{album.year} / CHAPTER {String(index + 1).padStart(2, '0')}</div><h2>{album.title}</h2><p>{album.description}</p><Button variant="ghost" className="editorial-link" onClick={() => setSelected(album)}>EXPLORE THE ERA<ArrowUpRight size={14}/></Button></article>)}</div></section><Dialog open={Boolean(selected)} onOpenChange={open => { if(!open) setSelected(null); }}><DialogContent className="cinema-modal">{selected && <><img src={selected.image} alt={selected.title} className="album-dialog-image"/><p className="eyebrow">{selected.year} · THE WEEKND</p><DialogTitle className="modal-title">{selected.title}</DialogTitle><DialogDescription>{selected.description}</DialogDescription><p className="eyebrow">ESSENTIAL LISTENING</p><ol className="track-list">{selected.tracks.map((t, i) => <li key={t}><span className="mr-5 text-primary">0{i + 1}</span>{t}</li>)}</ol><Button asChild className="cinema-button"><a href={`https://music.apple.com/us/search?term=${encodeURIComponent(`The Weeknd ${selected.title}`)}`} target="_blank" rel="noreferrer"><Play/>LISTEN ON APPLE MUSIC<ArrowUpRight/></a></Button></>}</DialogContent></Dialog></>;
+}

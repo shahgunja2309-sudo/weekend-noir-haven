@@ -1,24 +1,13 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from '@tanstack/react-router';
+import { useState } from 'react';
+import { ArrowDown, ArrowUpRight, Play } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
+import { WorldCards } from '@/components/editorial';
+import { images, pageHead } from '@/lib/artist-data';
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
-export const Route = createFileRoute("/")({
-  component: Index,
-});
-
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
+export const Route = createFileRoute('/')({ head: () => pageHead('The sound of the night', 'Explore the music, evolution and world of The Weeknd in an independent cinematic fan archive.'), component: Index });
 function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
+ const [trailer, setTrailer] = useState(false);
+ return <><section className="hero"><img className="hero-image" src={images.hero} alt="Cinematic fan-art portrait of The Weeknd in a crimson suit against a city at night" fetchPriority="high"/><div className="hero-content"><p className="hero-kicker">AN ARTIST. AN ERA. A WORLD OF HIS OWN.</p><h1>THE<br/>WEEKND</h1><p className="hero-subtitle">THE SOUND OF THE NIGHT</p><p className="hero-description">Explore the music, the evolution, and the world behind one of the most influential artists of his generation.</p><div className="hero-actions"><Button asChild className="cinema-button"><Link to="/music">EXPLORE<ArrowUpRight/></Link></Button><Button variant="outline" className="cinema-button trailer-button" onClick={() => setTrailer(true)}><Play className="size-3"/>WATCH TRAILER</Button></div></div><div className="hero-bottom"><a href="#world" className="scroll-cue"><ArrowDown size={15}/>SCROLL TO DISCOVER</a><span className="hero-signature">The night is only the beginning.</span><span className="hero-index"><b>01</b> / 05</span></div></section><section id="world" className="content-section reveal"><div className="section-heading"><div><p className="eyebrow">STEP INSIDE</p><h2>The World of The Weeknd</h2></div><p className="section-description">More than music. A universe of sound, stories,<br className="hidden md:block"/> and the people who make it unforgettable.</p></div><WorldCards/></section><Dialog open={trailer} onOpenChange={setTrailer}><DialogContent className="max-w-4xl border-border bg-background p-5"><DialogTitle className="font-display text-2xl">Hurry Up Tomorrow</DialogTitle><DialogDescription>The official film trailer · Lionsgate</DialogDescription><iframe className="aspect-video w-full" src={trailer ? 'https://www.youtube-nocookie.com/embed/e2PsmMlSP5s' : undefined} title="Hurry Up Tomorrow official trailer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen/><Button asChild variant="link"><a href="https://www.youtube.com/watch?v=e2PsmMlSP5s" target="_blank" rel="noreferrer">WATCH ON YOUTUBE<ArrowUpRight/></a></Button></DialogContent></Dialog></>;
 }
