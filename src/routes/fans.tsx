@@ -1,0 +1,14 @@
+import { createFileRoute } from '@tanstack/react-router';
+import { useState } from 'react';
+import { ArrowUpRight } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
+import { PageIntro } from '@/components/editorial';
+import { SubmissionForm } from '@/components/submission-form';
+import { images, pageHead } from '@/lib/artist-data';
+export const Route = createFileRoute('/fans')({ head: () => pageHead('The After Hours community', 'Celebrate favorite Weeknd eras and unforgettable moments. Share your fan story and photo with the XO fan archive.', images.stage), component: Fans });
+const moments = [{ title: 'The red-suit nights', image: images.after, era: 'AFTER HOURS', text: 'A city after midnight. The opening synths of Blinding Lights. An era that made the whole world feel the same heartbeat.' }, { title: 'A new kind of star', image: images.starboy, era: 'STARBOY', text: 'An electric reinvention, a new silhouette, and the songs we still turn up every time. The soundtrack to becoming someone new.' }, { title: 'Until the dawn', image: images.dawn, era: 'DAWN FM', text: 'That imaginary radio station we never wanted to leave. A little nostalgia, a little hope, and a light at the end of the night.' }];
+function Fans() {
+ const [open, setOpen] = useState(false);
+ return <><PageIntro label="FOR THE MUSIC. FOR THE NIGHT. FOR XO." title="THE AFTER HOURS COMMUNITY" description="Different cities. Different stories. One soundtrack. A place for the people who live in the music."/><section className="content-section"><div className="fan-feature"><img src={images.stage} alt="The Weeknd After Hours Til Dawn official tour poster"/><div className="fan-feature-text"><p className="eyebrow">YOUR MOMENTS MATTER</p><h2>Every fan has<br/>a story.</h2><p>The first song. The unforgettable show.<br/>The night that stayed with you.</p><Button className="cinema-button" onClick={() => setOpen(true)}>SHARE YOUR STORY<ArrowUpRight/></Button></div></div><div className="section-heading"><div><p className="eyebrow">THE MOMENTS WE SHARE</p><h2>Favorite eras. Lasting memories.</h2></div><p className="section-description">Editorial reflections from the archive.<br/>Your stories could be the next chapter.</p></div><div className="fan-grid">{moments.map(m => <article key={m.title} className="fan-story reveal"><img src={m.image} alt={m.era + ' artwork'} loading="lazy"/><h3>{m.title}</h3><p>{m.text}</p><p className="fan-credit">{m.era} / XO ARCHIVE EDITORIAL</p></article>)}</div></section><Dialog open={open} onOpenChange={setOpen}><DialogContent className="cinema-modal"><p className="eyebrow">THE COMMUNITY</p><DialogTitle className="modal-title">Your story.<br/>Our soundtrack.</DialogTitle><DialogDescription>Share a moment from your world of The Weeknd.</DialogDescription><SubmissionForm fan/></DialogContent></Dialog></>;
+}
