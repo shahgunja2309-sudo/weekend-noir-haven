@@ -9,3 +9,5 @@
 - [x] Replace repeated Journey photos so every chapter has unique imagery
 - [x] Verify the unique Journey imagery
 - [x] Republish the website
+- [ ] Add descriptive alt text to all Journey photos
+- [ ] Verify the Journey timeline remains readable with images disabled
