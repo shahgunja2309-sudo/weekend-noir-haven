@@ -7,4 +7,5 @@
 - [x] Verify the expanded Journey page
 - [x] Publish the website
 - [x] Replace repeated Journey photos so every chapter has unique imagery
-- [ ] Verify the unique Journey imagery and republish
+- [x] Verify the unique Journey imagery
+- [ ] Republish the website
