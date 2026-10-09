@@ -5,4 +5,7 @@
 - [x] Verify forms, navigation and mobile layout
 - [x] Expand Journey into Abel Tesfaye’s full career timeline
 - [x] Verify the expanded Journey page
-- [ ] Publish the website
+- [x] Publish the website
+- [x] Replace repeated Journey photos so every chapter has unique imagery
+- [x] Verify the unique Journey imagery
+- [ ] Republish the website
