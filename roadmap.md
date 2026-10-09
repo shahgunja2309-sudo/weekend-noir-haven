@@ -10,4 +10,4 @@
 - [x] Verify the unique Journey imagery
 - [x] Republish the website
 - [x] Add descriptive alt text to all Journey photos
-- [ ] Verify the Journey timeline remains readable with images disabled
+- [x] Verify the Journey timeline remains readable with images disabled
