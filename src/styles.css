@@ -253,7 +253,7 @@ body:has(.page-intro) .site-header { color:var(--foreground); border-color:var(-
 .journey-section { padding-top:75px; }
 .timeline-item { display:grid; grid-template-columns:150px 250px 1fr; align-items:center; gap:38px; padding:0 0 65px; position:relative; }
 .timeline-year { font-family:var(--font-display); font-size:40px; }.timeline-year:after { content:''; width:7px; height:7px; background:var(--primary); position:absolute; left:112px; top:calc(50% - 35px); border-radius:50%; }
-.timeline-image { width:100%; aspect-ratio:1.15; object-fit:cover; }
+.timeline-image { width:100%; aspect-ratio:1.15; object-fit:cover; color:var(--muted-foreground); font-size:11px; line-height:1.6; }
 .timeline-copy h2 { font-family:var(--font-display); font-size:35px; margin:10px 0 16px; }.timeline-copy p { font-size:12px; line-height:1.9; color:var(--muted-foreground); max-width:390px; }
 .timeline-detail { padding:15px 0; color:var(--foreground)!important; }
 .fan-feature { position:relative; height:380px; overflow:hidden; margin-bottom:50px; }.fan-feature img { width:100%; height:100%; object-fit:cover; object-position:right center; }.fan-feature:after { content:''; position:absolute; inset:0; background:var(--hero-shade); }.fan-feature-text { position:absolute; z-index:1; top:80px; left:40px; max-width:370px; color:var(--hero-text); }.fan-feature h2 { font-family:var(--font-display); font-size:42px; font-weight:400; line-height:1.3; }.fan-feature p { font-size:12px; line-height:1.8; margin:20px 0; }
