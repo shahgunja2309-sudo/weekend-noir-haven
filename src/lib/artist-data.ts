@@ -10,6 +10,7 @@ import stage from '@/assets/stage.asset.json';
 import hero from '@/assets/cinematic-hero.jpg';
 import anonymousStudio from '@/assets/journey-anonymous-studio.jpg';
 import stadiumNight from '@/assets/journey-stadium-night.jpg';
+import filmSet from '@/assets/journey-film-set.jpg';
 export const images = { hero, portrait: portrait.url, stage: stage.url, after: after.url, starboy: starboy.url, dawn: dawn.url };
 export const albums = [
  { title: 'Trilogy', year: '2012', image: trilogy.url, description: 'Where the night began. Three mixtapes that redefined the sound of alternative R&B.', tracks: ['Wicked Games', 'The Morning', 'House of Balloons / Glass Table Girls'] },
@@ -31,7 +32,7 @@ export const journeyMilestones = [
  { year: '2020', label: 'AFTER HOURS', title: 'A cinematic phenomenon', image: after.url, description: 'A bloodied red-suit character carries an uninterrupted story across videos and performances as Blinding Lights becomes a defining global hit.', detail: 'After Hours fused album, character and cinema into one extended campaign. Billboard later ranked Blinding Lights as the number-one song on its Greatest Songs of All Time Hot 100 chart.' },
  { year: '2021', label: 'THE BIGGEST STAGE', title: 'Super Bowl LV', image: stadiumNight, description: 'The Weeknd headlines the Super Bowl LV halftime show in Tampa, translating the After Hours world into a stadium-scale performance.', detail: 'The performance moved through the stands and field with a huge ensemble of red-jacketed figures, extending one of his most recognizable visual eras.' },
  { year: '2022', label: 'DAWN & THE ROAD', title: 'A new broadcast begins', image: dawn.url, description: 'Dawn FM imagines a radio station in purgatory, while the After Hours Til Dawn Tour brings both connected albums to stadiums around the world.', detail: 'Narrated by Jim Carrey, Dawn FM reframed an album as a continuous broadcast. The stadium tour transformed the two records into one monumental live world.' },
- { year: '2023', label: 'SCREEN & SOUND', title: 'The Idol and Popular', image: portrait.url, description: 'Abel co-creates and stars in HBO’s The Idol, extending his work into television while Popular becomes one of the project’s lasting musical moments.', detail: 'The series marked his first leading television role. Popular, featuring Madonna and Playboi Carti, carried the soundtrack beyond the screen.' },
+ { year: '2023', label: 'SCREEN & SOUND', title: 'The Idol and Popular', image: filmSet, description: 'Abel co-creates and stars in HBO’s The Idol, extending his work into television while Popular becomes one of the project’s lasting musical moments.', detail: 'The series marked his first leading television role. Popular, featuring Madonna and Playboi Carti, carried the soundtrack beyond the screen.' },
  { year: '2025', label: 'THE FINAL CHAPTER', title: 'Hurry Up Tomorrow', image: tomorrow.url, description: 'The album completes the trilogy begun by After Hours and Dawn FM, followed by a feature film that expands the era into psychological cinema.', detail: 'Hurry Up Tomorrow looks backward through the mythology of The Weeknd while confronting what comes after it—a finale presented as both record and film.' },
 ] as const;
 export const worlds = [
