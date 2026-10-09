@@ -8,4 +8,4 @@
 - [x] Publish the website
 - [x] Replace repeated Journey photos so every chapter has unique imagery
 - [x] Verify the unique Journey imagery
-- [ ] Republish the website
+- [x] Republish the website
